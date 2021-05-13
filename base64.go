@@ -5,8 +5,13 @@ import (
 	"fmt"
 )
 
-// DecodeBase64String 解码经Base64编码的String
-func DecodeBase64String(str string) ([]byte, error) {
+// EncodeBase64 Bytes编码为Base64
+func EncodeBase64(src []byte) string {
+	return base64.StdEncoding.EncodeToString(src)
+}
+
+// DecodeBase64 Base64解码为Bytes
+func DecodeBase64(str string) ([]byte, error) {
 	decodedBytes, err := base64.StdEncoding.DecodeString(str)
 	if err != nil {
 		return nil, fmt.Errorf("Unable to decode base64 string! %s", err)
@@ -14,22 +19,40 @@ func DecodeBase64String(str string) ([]byte, error) {
 	return decodedBytes[:], nil
 }
 
-// EncodeBase64 对Bytes进行Base64编码
-func EncodeBase64(bytes []byte) string {
-	return base64.StdEncoding.EncodeToString(bytes)
-}
-
-// EncodeBase64String 对Bytes进行Base64编码
+// EncodeBase64String String编码为Base64
 func EncodeBase64String(str string) string {
 	return base64.StdEncoding.EncodeToString([]byte(str))
 }
 
-// EncodeURLSafeBase64 将Bytes使用Base64编码(URL安全)
-func EncodeURLSafeBase64(bytes []byte) string {
-	return base64.RawURLEncoding.EncodeToString(bytes)
+// DecodeBase64String Base64解码为String
+func DecodeBase64String(src string) (string, error) {
+	b, err := DecodeBase64(src)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
 
-// DecodeURLSafeBase64 对String使用Base64解码(URL安全)
-func DecodeURLSafeBase64(str string) ([]byte, error) {
-	return base64.RawURLEncoding.DecodeString(str)
+// EncodeURLSafeBase64 Bytes编码为Base64(URL安全)
+func EncodeURLSafeBase64(src []byte) string {
+	return base64.RawURLEncoding.EncodeToString(src)
+}
+
+// DecodeURLSafeBase64 Base64(URL安全)解码为Bytes
+func DecodeURLSafeBase64(src string) ([]byte, error) {
+	return base64.RawURLEncoding.DecodeString(src)
+}
+
+// EncodeURLSafeBase64String String编码为Base64(URL安全)
+func EncodeURLSafeBase64String(src string) string {
+	return base64.RawURLEncoding.EncodeToString([]byte(src))
+}
+
+// DecodeURLSafeBase64String Base64(URL安全)解码为String
+func DecodeURLSafeBase64String(src string) (dst string, err error) {
+	b, err := base64.RawURLEncoding.DecodeString(src)
+	if err != nil {
+		return "", err
+	}
+	return string(b), nil
 }
