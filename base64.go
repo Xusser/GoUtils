@@ -14,7 +14,7 @@ func EncodeBase64(src []byte) string {
 func DecodeBase64(str string) ([]byte, error) {
 	decodedBytes, err := base64.StdEncoding.DecodeString(str)
 	if err != nil {
-		return nil, fmt.Errorf("Unable to decode base64 string! %s", err)
+		return nil, fmt.Errorf("unable to decode base64 string! %s", err)
 	}
 	return decodedBytes[:], nil
 }
