@@ -7,10 +7,9 @@ import (
 	"encoding/hex"
 	"fmt"
 	"hash/crc64"
-	"strings"
 )
 
-// CRC64 计算CRC64哈希值
+// CRC64 计算CRC64哈希值(CRC-64-ISO)
 func CRC64(payload []byte) string {
 	h := crc64.New(crc64.MakeTable(crc64.ISO))
 	h.Write(payload)
@@ -20,8 +19,7 @@ func CRC64(payload []byte) string {
 // SHA256 计算SHA256哈希值
 func SHA256(payload []byte) string {
 	hash := sha256.Sum256(payload)
-	result := hex.EncodeToString(hash[:])
-	return strings.ToUpper(result)
+	return hex.EncodeToString(hash[:])
 }
 
 // HMACSHA256 计算HMAC SHA256值
