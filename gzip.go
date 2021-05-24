@@ -7,6 +7,7 @@ import (
 	"io/ioutil"
 )
 
+// GzipCompress Gzip压缩(bytes)
 func GzipCompress(data []byte) (compressed []byte, err error) {
 	var buf bytes.Buffer
 	zw := gzip.NewWriter(&buf)
@@ -23,6 +24,7 @@ func GzipCompress(data []byte) (compressed []byte, err error) {
 	return
 }
 
+// GzipDecompress Gzip解压缩(bytes)
 func GzipDecompress(compressed []byte) (data []byte, err error) {
 	r, err := gzip.NewReader(bytes.NewReader(compressed))
 	if err != nil {
@@ -38,7 +40,7 @@ func GzipDecompress(compressed []byte) (data []byte, err error) {
 	return b, nil
 }
 
-// GzipCompressString GZIP压缩
+// GzipCompressString GZIP压缩(string)
 func GzipCompressString(data string) (string, error) {
 	compressed, err := GzipCompress([]byte(data))
 	if err != nil {
@@ -48,7 +50,7 @@ func GzipCompressString(data string) (string, error) {
 	return base64.StdEncoding.EncodeToString(compressed), nil
 }
 
-// GzipDecompressString GZIP解压
+// GzipDecompressString GZIP解压缩(string)
 func GzipDecompressString(data string) (string, error) {
 	compressed, err := DecodeBase64(data)
 	if err != nil {
